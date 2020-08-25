@@ -22,7 +22,7 @@ EndFunc
 
 Func fromMenuToCraft()
 	ffSend("x")
-	Sleep(1000)
+	Sleep(1500)
 	ffSend("x")
 	Sleep(2500)
 EndFunc
@@ -41,11 +41,8 @@ Func foodCheck()
 	EndIf
 
 	Local $foodMsLeft = (($mConf["foodTimeLeft"] * 60000) - (_TimeGetStamp() - $mConf["foodLastMonch"]))
-	ffSend("$foodMsLeft: " & $foodMsLeft & @LF)
-	ffSend("Current timestamp: " & _TimeGetStamp() & @LF)
-	ffSend("lastMonch: " & $mConf["foodLastMonch"] & @LF)
 	If ($foodMsLeft < ($mConf["foodTimeFloor"] * 60000)) Then
-		ffSend("eat da food")
+		eatDaFood()
 		$mConf["foodLastMonch"] = _TimeGetStamp()
 		$mConf["foodTimeLeft"] = $mConf["foodTimeLeft"] + $mConf["foodDuration"]
 	EndIf
